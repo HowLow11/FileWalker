@@ -6,7 +6,7 @@
 import os
 
 
-def main():
+def main(): # Данила
     menu = '1.Просмотр каталога\n2.На уровень вверх\n3.На уровень вниз\n' \
            '4.Количество файлов и каталогов\n5.Размер текущего каталога (в байтах)\n' \
            '6.Поиск файла\n7.Выход из программы'
@@ -23,7 +23,7 @@ def main():
         runCommand(command)
 
 
-def acceptCommand():
+def acceptCommand(): # Данила
     print('Введите Комманду:', end=' ')
     com = str(input())
     if com.lower() == '1':
@@ -45,23 +45,23 @@ def acceptCommand():
         return acceptCommand()
 
 
-def catalog():
+def catalog():  # Денис
     """Returns list [filenames, dirnames] from current dir"""
     for path, dirnames, filenames in os.walk(os.getcwd()):
         return [filenames, dirnames]
 
 
-def moveUp():
+def moveUp():  # Денис
     """Moves up in the path"""
     os.chdir(os.getcwd()[:os.getcwd().rfind('\\')])
 
 
-def moveDown(currentDir):
+def moveDown(currentDir): # Данила
     """Moves down in the path to the inputed dir"""
     os.chdir(catalog()[1][currentDir])
 
 
-def countFiles():
+def countFiles(): # Данила
     """Counts the amount of files in current dir"""
     files_ = []
     dirs_ = []
@@ -74,7 +74,7 @@ def countFiles():
     return result
 
 
-def countBytes():
+def countBytes(): # Данила
     bytes = 0
     c_path = os.getcwd()
     moveUp()
@@ -86,7 +86,7 @@ def countBytes():
     return "Объем всех файлов в текущей папке: "+str(bytes)
 
 
-def findFiles(target, path, files_):
+def findFiles(target, path, files_): # Денис
     files = os.listdir(path)
     for file in files:
         file = str(file)
@@ -102,8 +102,8 @@ def findFiles(target, path, files_):
     return files_
 
 
-def runCommand(command):
-    if command == 1:
+def runCommand(command): 
+    if command == 1: # Данила
         j = -1
         print("CATALOG")
         print('Папки:')
@@ -114,19 +114,19 @@ def runCommand(command):
         for i in catalog()[0]:
             j += 1
             print(str(j)+') ' + i)
-    if command == 2:
+    if command == 2: # Данила
         moveUp()
-    if command == 3:
+    if command == 3: # Данила
         try:
             moveDown(int(input('Введите номер подкаталога: ')))
         except IndexError:
             print('Ошибка. Значение не относится к подкаталогу.')
             return runCommand(3)
-    if command == 4:
+    if command == 4: # Данила
         print(countFiles())
-    if command == 5:
+    if command == 5: # Данила
         print(countBytes())
-    if command == 6:
+    if command == 6: # Денис
         files_ = []
         path = os.getcwd()
         files_ = findFiles(str(input('Введите имя искомого файла: ')), path, files_)
